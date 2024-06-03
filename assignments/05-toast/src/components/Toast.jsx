@@ -6,7 +6,7 @@ function Toast({ toast }) {
         <li key={i}>
           <div
             className={clsx(
-              "border bg-white rounded-lg flex p-6 shadow-lg w-[320px] transition items-center duration-500 text-sm",
+              "border bg-white rounded-lg flex p-6 shadow-lg w-[320px] transition items-center duration-500",
               {
                 "translate-x-0": item.id, // 생길때
                 "translate-x-[calc(100%+20px)]": !item.id, //없어질때
