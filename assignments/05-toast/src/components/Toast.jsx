@@ -1,26 +1,29 @@
 import clsx from "clsx";
+import { useEffect, useState } from "react";
+
 function Toast({ toast }) {
+  const [isDisplayed, setIsDisplayed] = useState(false);
+
+  useEffect(() => {
+    setIsDisplayed(true);
+    setTimeout(() => setIsDisplayed(false), toast.seconds - 500);
+  }, [toast.seconds]);
+
   return (
-    <ul className="fixed bottom-6 right-6 grid grid-cols-1 gap-y-3">
-      {toast.map((item, i) => (
-        <li key={i}>
-          <div
-            className={clsx(
-              "border bg-white rounded-lg flex p-6 shadow-lg w-[320px] transition items-center duration-500",
-              {
-                "translate-x-0": item.id, // 생길때
-                "translate-x-[calc(100%+20px)]": !item.id, //없어질때
-              }
-            )}
-          >
-            <div className="grow flex flex-col">
-              <h5 className="font-semibold">{item.title}</h5>
-              <p>{item.content}</p>
-            </div>
-          </div>
-        </li>
-      ))}
-    </ul>
+    <div
+      className={clsx(
+        "border bg-white rounded-lg flex p-6 shadow-lg w-[320px] transition items-center duration-500",
+        {
+          "translate-x-0": isDisplayed, // 나타날때
+          "translate-x-[calc(100%+20px)]": !isDisplayed, // 안보일때
+        }
+      )}
+    >
+      <div className="flex flex-col">
+        <h5 className="font-semibold">{toast.title}</h5>
+        <p>{toast.content}</p>
+      </div>
+    </div>
   );
 }
 export default Toast;

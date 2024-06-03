@@ -10,19 +10,27 @@ export const ToastContext = createContext(initialState);
 export const useToast = () => useContext(ToastContext);
 
 export function ToastProvider({ children }) {
-  const [toast, setToast] = useState([]);
+  const [toasts, setToasts] = useState([]);
   const value = {
-    on: (element) => {
-      setToast((prev) => [...prev, element]);
+    on: (toast) => {
+      setToasts((prev) => [...prev, toast]);
     },
     off: (id) => {
-      setToast((prev) => prev.filter((toast) => toast.id !== id));
+      setToasts((prev) => prev.filter((toast) => toast.id !== id));
     },
   };
   return (
     <ToastContext.Provider value={value}>
       {children}
-      <Toast toast={toast} />
+      {toasts.length > 0 && (
+        <ul className="fixed bottom-6 right-6 grid grid-cols-1 gap-y-3">
+          {toasts.map((toast) => (
+            <li key={toast.id}>
+              <Toast toast={toast} />
+            </li>
+          ))}
+        </ul>
+      )}
     </ToastContext.Provider>
   );
 }
