@@ -9,6 +9,9 @@ function Toast({ toast }) {
     setTimeout(() => setIsDisplayed(false), toast.seconds - 500);
   }, [toast.seconds]);
 
+  const handleDelete = () => {
+    setIsDisplayed(false);
+  };
   return (
     <div
       className={clsx(
@@ -18,6 +21,7 @@ function Toast({ toast }) {
           "translate-x-[calc(100%+20px)]": !isDisplayed, // 안보일때
         }
       )}
+      onClick={handleDelete}
     >
       <div className="flex flex-col">
         <h5 className="font-semibold">{toast.title}</h5>

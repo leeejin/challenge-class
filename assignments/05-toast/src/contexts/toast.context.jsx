@@ -13,7 +13,7 @@ export function ToastProvider({ children }) {
   const [toasts, setToasts] = useState([]);
   const value = {
     on: (toast) => {
-      setToasts((prev) => [...prev, toast]);
+      setToasts((prev) => [...prev, { ...toast, id: crypto.randomUUID() }]);
     },
     off: (id) => {
       setToasts((prev) => prev.filter((toast) => toast.id !== id));

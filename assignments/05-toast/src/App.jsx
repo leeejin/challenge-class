@@ -12,7 +12,6 @@ function App() {
   const seconds = useRef(null);
   const handleToast = () => {
     const formData = {
-      id: crypto.randomUUID(),
       title: title.current.value,
       content: content.current.value,
       seconds: parseInt(seconds.current.value) || 2000,
